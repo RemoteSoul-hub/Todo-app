@@ -12,7 +12,8 @@ function addItem(e) {
     console.log(newItem);
     // Now I need to create a new Li element with the newItem
     let li = document.createElement('li');
-    console.log(li);
+    // Assign class to generated list 
+    li.className="item";
     li.appendChild(document.createTextNode(newItem));
     // Create an X button to delete separately 
     let deleteBtn = document.createElement('button');
@@ -45,10 +46,13 @@ itemList.addEventListener('click', removeItem);
 function removeItem(e) {
     e.preventDefault();
     if (e.target.classList.contains('x-btn')){
-        if (confirm('Are you sure')) {
         let li = e.target.parentElement;
-        itemList.removeChild(li);    
-        }
+        //ANIMATION TRANSITION
+        li.classList.add("swipe")
+        li.addEventListener('transitionend', function () 
+        {
+            itemList.removeChild(li); 
+        } )
     }
 }
 
